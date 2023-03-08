@@ -1,0 +1,41 @@
+--Create @Par Master Database
+CREATE DATABASE BENEFACT_MASTER_VBHL7
+
+--Please uncomment below collate for DB collate
+
+--COLLATE Latin1_General_BIN
+
+GO
+
+ 
+-- Add Login User
+
+EXEC sp_addlogin  'BENEFACT_MASTER_USER_VBHL7','133tcru@NOS'
+
+GO
+ 
+
+USE BENEFACT_MASTER_VBHL7
+
+GO
+
+ -- Creating UserId for Database mapping to Login User Id
+
+EXEC sp_grantdbaccess  'BENEFACT_MASTER_USER_VBHL7','BENEFACT_MASTER_USER_VBHL7'
+
+GO
+
+
+-- Add Role to the Login User for the Database
+
+EXEC sp_addrolemember N'db_owner', N'BENEFACT_MASTER_USER_VBHL7'
+
+GO
+
+--Schema Name BENEFACT_MASTER_SCHEMA
+
+CREATE SCHEMA BENEFACT_MASTER_SCHEMA_VBHL7 AUTHORIZATION BENEFACT_MASTER_USER_VBHL7
+GO
+ 
+ALTER USER BENEFACT_MASTER_USER_VBHL7 WITH DEFAULT_SCHEMA = BENEFACT_MASTER_SCHEMA_VBHL7
+GO   

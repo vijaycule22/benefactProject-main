@@ -1,0 +1,144 @@
+<div class="login-scrn">
+    <div class=" log-block">
+        <div class="login-form">
+           <form class="form" name="form" (ngSubmit)="onSubmit(model.userID,model.password)" #f="ngForm" novalidate>
+
+            <h1>Login</h1>
+            <div class="form-field field">
+                <label for="username1" class="label">Username</label>
+                <input class="input form-control" id="username1" type="username" aria-describedby="username1-help" pInputText  
+                name="userID" [(ngModel)]="model.userID" placeholder="User ID" #userID="ngModel" 
+                required autocomplete="off" autocorrect="off" autocapitalize="off"/>
+            </div>
+            <div class="form-field field">
+                <label for="username1" class="label">Password</label>
+                <input class="input form-control" id="username1" aria-describedby="username1-help" pInputText  
+                placeholder="Password" type="password" name="password" #password="ngModel" [(ngModel)]="model.password" 
+                 required/> 
+            </div> 
+            <button type="submit" class="custom-btn btn-11 col-12">Login</button>
+            <hr>
+            <button type="button" (click)="onLoginPageSignup()" class="custom-btn b-outline col-12">Sign up</button>
+           </form>
+        </div>
+        <div class=" welcome-block" [class.slide-left]="slideLeft" [class.slide-right]="slideRight">
+            <div class="welcome-text">
+                <p class="title">Welcome Back...</p>
+                <p class="quote">Get the money you need to make <br /> your dreams a reality.</p>
+            </div>
+           
+              <img src="assets/svg/welcome-undraw.svg" height="300px" width="280px">
+        </div>
+          <div class="signup-form">
+            <form #userForm="ngForm" class="form" name="form" (ngSubmit)="OnAddUserClick(userForm.value,userlist.PASSHASH)" novalidate>
+                <h1>Sign Up</h1>
+                <div class="row">
+                <div class="form-group col-6"> 
+                    <div class="form-field field">                
+                    <input class="input form-control" id="username1" type="username" aria-describedby="username1-help" pInputText  
+                            name="FIRST_NAME" [(ngModel)]="userlist.FIRST_NAME" placeholder="First Name" #FIRST_NAME="ngModel" 
+                            required autocomplete="off" autocorrect="off" autocapitalize="off"/>
+                  <div *ngIf="FIRST_NAME.errors && (FIRST_NAME.dirty || FIRST_NAME.touched)" class="form-text text-danger">
+                    <div [hidden]="!FIRST_NAME.errors.required">
+                      Please Enter First Name
+                    </div>
+                </div>
+                  </div>
+                </div>
+                  <div class="form-group col-6">        
+                      <input class="input form-control" id="username1" type="username" aria-describedby="username1-help" pInputText  
+                        name="LAST_NAME" [(ngModel)]="userlist.LAST_NAME" placeholder="Last Name" #LAST_NAME="ngModel" 
+                        required autocomplete="off" autocorrect="off" autocapitalize="off"/>              
+                    <div *ngIf="LAST_NAME.errors && (LAST_NAME.dirty || LAST_NAME.touched)" class="form-text text-danger">
+                      <div [hidden]="!LAST_NAME.errors.required">
+                        Please Enter Last Name
+                      </div>
+                      <!-- <div [hidden]="!LAST_NAME.errors.minlength">
+                        please enter atleast 4 number
+                      </div> -->
+                    </div>
+                    </div>
+                </div>
+                <div class="form-field field">                    
+                    <input class="input form-control" id="username1" type="username" aria-describedby="username1-help" pInputText  
+                    name="EMAIL" [(ngModel)]="userlist.EMAIL" placeholder="Email" #EMAIL="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                    required autocomplete="off" autocorrect="off" autocapitalize="off"/>
+                    <div *ngIf="EMAIL.errors && (EMAIL.dirty || EMAIL.touched)" class="form-text text-danger">
+                        <div [hidden]="!EMAIL.errors.required">
+                            Please Enter Email ID
+                        </div>
+                        <div [hidden]="!EMAIL.errors.pattern">
+                            Please Enter Valid Email ID
+                        </div>
+                      </div>
+                </div> 
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-field field">                           
+                            <input class="input form-control" id="PASSHASH" aria-describedby="username1-help" pInputText  
+                            placeholder="Password" type="password" name="PASSHASH" #PASSHASH="ngModel" [(ngModel)]="userlist.PASSHASH" [ngModelOptions]="{standalone: true}" 
+                            pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" required/> 
+                            <div *ngIf="PASSHASH.invalid && (PASSHASH.dirty || PASSHASH.touched)" class="form-text text-danger">
+                            <div *ngIf="PASSHASH.errors.required">
+                              Field is required
+                            </div>
+                            <div *ngIf="PASSHASH.errors.pattern">
+                              Password must contain at least one number, one uppercase and a
+                              lowercase letter and at least 8 characters<br />Password cannot
+                              contain whitespace
+                            </div>
+                          </div>
+                        </div> 
+                    </div>
+                    <div class="col-6">
+                        <div class="form-field field">                            
+                            <input class="input form-control" id="username1" aria-describedby="username1-help" pInputText  
+                            placeholder="Re Enter Password" type="password" name="CONFIR_PASSHASH" #CONFIR_PASSHASH="ngModel"
+                             [(ngModel)]="userlist.CONFIR_PASSHASH" 
+                             required/> 
+                             <div *ngIf="CONFIR_PASSHASH.invalid &&(CONFIR_PASSHASH.dirty || CONFIR_PASSHASH.touched)" class="form-text text-danger">                           
+                             <div *ngIf="CONFIR_PASSHASH.errors.required">
+                               Field is required
+                             </div>
+                             <div *ngIf="CONFIR_PASSHASH.errors.pattern">
+                               Password must contain at least one number, one uppercase and a
+                               lowercase letter and at least 8 characters<br />Password cannot
+                               contain whitespace
+                             </div>
+                             <div *ngIf="CONFIR_PASSHASH.errors.con">
+                               Passwords did not match
+                             </div> 
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                 <div class="form-field field">                   
+                    <input class="input form-control" id="username1" aria-describedby="username1-help" pInputText  
+                    placeholder="Employee ID" type="text" name="EMPLOYEE_ID" #EMPLOYEE_ID="ngModel" [(ngModel)]="userlist.EMPLOYEE_ID" maxlength="8" minlength="6"
+                     required/> 
+                     <div *ngIf="EMPLOYEE_ID.errors && (EMPLOYEE_ID.dirty || EMPLOYEE_ID.touched)" class="form-text text-danger">
+                        <div [hidden]="!EMPLOYEE_ID.errors.required">
+                            Please Enter Employee ID
+                        </div>
+                        <div [hidden]="!EMPLOYEE_ID.errors.minlength">
+                            Please Enter Atleast Six Letters
+                        </div>
+                        <div [hidden]="!EMPLOYEE_ID.errors.maxlength">
+                            Maximun Allowed Eight Letters
+                          </div>
+                      </div>
+                </div>   
+                <button type="submit" [disabled]="!userForm.form.valid" class="custom-btn btn-11 col-12">Sign up</button>
+                <hr>
+                <button type="button" (click)="onSignupPageLogin()" class="custom-btn b-outline col-12">Login</button>
+              </form>
+             </div> 
+    </div>
+</div>
+<app-growl [value]="msgs" sticky="sticky"></app-growl>
+
+
+<div class="page-loader" *ngIf="pageLoader">
+  <p-progressSpinner strokeWidth="3"></p-progressSpinner>
+  <label>Loading...</label>
+</div>

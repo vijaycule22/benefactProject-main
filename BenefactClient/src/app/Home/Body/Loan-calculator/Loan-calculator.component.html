@@ -1,0 +1,115 @@
+<p class="titles">Loan Calculator</p>
+<div class="row apply-loan-grid">
+    <div class="col-3">
+        <div class="form-field field">
+            <label for="amount" class="label">Amount</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text"><i class="fa fa-inr"></i></span>
+                <input class="input form-control" id="amount" type="username" aria-describedby="amount-help" pInputText
+                placeholder="Amount" [(ngModel)]="Amount" maxlength="6" (input)="onAmountInput()" required autocomplete="off"
+                autocorrect="off" autocapitalize="off" />
+                <span class="input-group-text">.00</span>
+              </div>
+            
+            <div class="chip-list" *ngIf="!Amount">
+                <div class="chip" (click)="onAmountChip(amountChip)" *ngFor="let amountChip of amountChips">
+                    {{amountChip}}k</div>
+            </div>
+            <p *ngIf="Amount" class="Amount-in-words"><i class="fa fa-inr"></i>{{amountInWords}} Rupees Only</p>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="form-field field">
+            <label for="Tenure" class="label">Tenure</label>
+            <p-dropdown [options]="tenureList" styleClass="" [(ngModel)]="Tenure"></p-dropdown>
+            <!-- <input class="input form-control" id="Tenure" type="username" aria-describedby="Tenure-help" pInputText
+                placeholder="Tenure" [(ngModel)]="Tenure" required autocomplete="off" autocorrect="off"
+                autocapitalize="off" /> -->
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="form-field field">
+            <label for="Rate of Interest" class="label">Rate of Interest</label>
+        
+            <div class="input-group">
+                <input class="input form-control" id="Rate of Interest" type="username" disabled="true"
+                    aria-describedby="Rate of Interest-help" pInputText placeholder="Rate of Interest" [(ngModel)]="RateInterest"
+                    required autocomplete="off" autocorrect="off" autocapitalize="off" />
+                <span class="input-group-text"><strong>%</strong></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 btn-field">
+        <!-- <button class="custom-btn b-outline" (click)="LoanCalculation(Amount,Tenure,RateInterest)">Calculate<div
+                class="dot"></div></button> -->
+                <button (click)="LoanCalculation(Amount,Tenure,RateInterest)" class="raised-btn calculateButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calculator"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h8zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z" />
+                    <path
+                        d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-2zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-4z" />
+                </svg>
+                 Calculate</button>
+    </div>
+</div>
+<div class="table-Div loan-calc-table" *ngIf="lstLoanSummary.length>0">
+    <div class="row">
+        <div class="col-3">
+            <div class="emi-apply-block">
+                <label>Monthly EMI
+                </label>
+                <span  *ngIf="emifinalamt" class="emit-amount">{{emifinalamt | currency:'INR'}}</span>
+                <p-skeleton *ngIf="!emifinalamt" width="140px" height="28px">
+                </p-skeleton>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="emi-apply-block">
+                <label>Total Interest
+                </label>
+                <span class="emit-amount">{{totalInterest | currency:'INR'}}</span>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="emi-apply-block">
+                <label>Total Amount
+                </label>
+                <span class="emit-amount">{{totalPaidAmount | currency:'INR'}}   <span class="total-increase-percentage">{{(totalAmountIncreasePercentage | number:'1.2-2' )}}%</span> </span>
+              
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="emi-apply-block">
+                <label >Get your loan</label>
+            <button class="custom-btn btn-11 " (click)="ApplyLoanRequest(Amount,Tenure,RateInterest)">Apply now</button>
+            </div>
+        </div>
+    </div>
+    <p-table [value]="lstLoanSummary">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Installment Date</th>
+                <!-- <th>EMI</th>                     -->
+                <th>Interest</th>
+                <th>Cumulative Interest</th>
+                <th>Cumulative ITO Paid</th>
+                <th>Principal</th>
+                <th>Balance</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-res>
+            <tr>
+                <td>{{res.INSTALLMENT_DATE}}</td>
+                <!-- <td>{{res.EMI | currency:'INR'}}</td>                     -->
+                <td>{{res.INTEREST | currency:'INR'}}</td>
+                <td>{{res.CUMULATIVE_INTEREST | currency:'INR'}}</td>
+                <td>{{res.CUMULATIVE_INTEREST_TO_BE_PAID | currency:'INR'}}</td>
+                <td>{{res.PRINCIPAL | currency:'INR'}}</td>
+                <td>{{res.BALANCE | currency:'INR'}}</td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<app-growl [value]="msgs" sticky="sticky"></app-growl> 

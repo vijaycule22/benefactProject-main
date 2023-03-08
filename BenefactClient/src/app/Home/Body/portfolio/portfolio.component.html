@@ -1,0 +1,109 @@
+<div class="port-folio">
+
+   <p class="titles">Portfolio Overview</p>
+   <div class="row">
+      <div class="col-6 ">
+
+         <div class="port-folio-chart mb-4">
+            <div class="Amount-balance">
+
+               <p class="current-lbl">Current value</p>
+               <p class="current-value" *ngIf="currentValue">{{currentValue | currency:'INR'}}</p>
+               <p class="current-value"><p-skeleton *ngIf="!currentValue" width="140px" height="32px">
+                  </p-skeleton></p>
+
+               <span class="current-date">
+                  as on {{currentDate | date: 'MMM d, y, h:mm:ss a'}}
+               </span>
+            </div>
+            <div #container id="container" *ngIf="finalChartData[0]" style="width:100%; height:250px;"></div>
+            <p-skeleton *ngIf="!finalChartData[0]" width="100%" height="250px">
+            </p-skeleton>
+            <div class="investment-return-block">
+               <div class="investment">
+                  <p class="invst-lbl">Investments</p>
+                  <p class="invst-value" *ngIf="investmentValue">{{investmentValue | currency:'INR'}}</p>
+                  <p class="invst-value"><p-skeleton *ngIf="!investmentValue" width="140px" height="28px">
+                     </p-skeleton></p>
+               </div>
+               <div class="returns">
+                  <p class="return-lbl">Returns</p>
+                  <p class="return-value" *ngIf="returnsValue">{{returnsValue | currency:'INR'}}<span
+                        class="return-percentage">
+                        (+{{returnPercentage | number:'1.0-2'}}%)</span></p>
+                  <p class="return-value">
+                     <p-skeleton *ngIf="!returnsValue" width="140px" height="28px">
+                     </p-skeleton>
+                  </p>
+               </div>
+            </div>
+         </div>
+
+
+         <div>
+            <div class="w-100 upcoming-pay">
+               <p>BENEFACT HEALTH</p>
+               <div #barChart id="barChart" *ngIf="!benefactHealth" style="width:100%; height:300px;padding: 2rem 0;">
+               </div>
+               <div #barChart id="barChart" *ngIf="benefactHealth" style="width:100%; height:300px;padding: 2rem 0;">
+                  <div class="my-3">
+                     <p-skeleton width="50%" height="50px">
+                     </p-skeleton>
+                  </div>
+                  <div class="my-3">
+                     <p-skeleton width="80%" height="50px">
+                     </p-skeleton>
+                  </div>
+
+               </div>
+
+            </div>
+         </div>
+
+      </div>
+      <div class="col-6 table-Div loan-calc-table">
+         <div class="row mb-4">
+            <div class="col-6">
+               <div class="w-100 upcoming-pay">
+                  <p>Your up coming payment</p>
+
+               </div>
+            </div>
+            <div class="col-6">
+               <div class="w-100 upcoming-pay">
+                  <p>BeneFact Limit</p>
+                  <div #pieCahrt id="pieCahrt" *ngIf="!benefactLimit" style="width:100%; height:200px;"></div>
+                  <div #pieCahrt class="limit-pie-chart" id="pieCahrt" *ngIf="benefactLimit"
+                     style="width:100%; height:200px;">
+                     <p-skeleton width="120px" height="120px" shape="circle">
+                     </p-skeleton>
+                  </div>
+
+               </div>
+            </div>
+         </div>
+         <p class="titles">Your active loan</p>
+         <div class="activeloan">
+            <p-table [value]="loanStatus">
+               <ng-template pTemplate="header">
+                  <tr>
+                     <th>Date</th>
+                     <th>Amount</th>
+                     <th>Status</th>
+                     <!-- <th>Color</th> -->
+                  </tr>
+               </ng-template>
+               <ng-template pTemplate="body" let-loan>
+                  <tr>
+                     <td>{{loan.PAYMENT_DATE | date: 'MMM y'}}</td>
+                     <td> {{loan.EMI_Amount | currency:'INR'}}</td>
+                     <td><span class="status {{loan.EMI_STATUS === true ? 'complete' : 'Pending' }}">{{loan.EMI_STATUS
+                           ==
+                           true ? 'completed' : 'To be paid'}}</span></td>
+                     <!-- <td>{{product.quantity}}</td> -->
+               </ng-template>
+            </p-table>
+         </div>
+      </div>
+   </div>
+</div>

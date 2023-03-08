@@ -1,0 +1,12 @@
+# Object file
+*.o
+
+# Ada Library Information
+*.ali
+
+# Python Server 
+*.pyc
+*.DS_Store
+
+# Node
+/BenefactClient/node_modules

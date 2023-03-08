@@ -1,0 +1,61 @@
+<div class="left-menu-grid">
+    
+    <div class="logo-block">
+        <span>BeneFact</span>
+    </div>
+    <div class="nav-links-container">
+        <p class="menu-title">Main Menu</p>
+      <ul class="nav-link-ul"> 
+          <li class="nav-links">
+              <a routerLink="/Home/portfolio" routerLinkActive="active" class="link">
+                  <i class="fa fa-pie-chart"></i>
+                  <span class="link-lbl">Portfolio</span>
+              </a>
+          </li>
+          <li class="nav-links left-menu-dropdown">
+           
+            <p-accordion>
+                <p-accordionTab [selected]="dropDownOpen">
+                    <p-header>
+                        <a class="link">
+                            <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
+                            <span class="link-lbl">Loan</span>
+                            <i class="fa fa-sort-desc" aria-hidden="true"></i>
+                        </a>
+                    </p-header>
+                    <ul>
+                        <li class="sub-link">
+                            <a routerLink="/Home/loanCalculator" routerLinkActive="active">
+                                <span class="link-lbl">Loan Calculator</span>
+                            </a>
+                        </li>
+                        <li class="sub-link">
+                            <a routerLinkActive="active" routerLink="/Home/applyLoan"  >
+                                <span class="link-lbl">Apply Loan</span>
+                            </a>
+                        </li>
+                        <li class="sub-link"> <a routerLink="loanAndRequests" routerLinkActive="active">
+                            <span class="link-lbl">Loan / Requests</span>
+                        </a></li>
+                    </ul>
+                </p-accordionTab>
+            </p-accordion>
+          </li>
+          <li class="nav-links">
+            <a routerLink="/contact" routerLinkActive="active" class="link" (click)="onSignout()">
+                <i class="fa fa-sign-out"></i>
+                <span  class="link-lbl">Sign out</span>
+            </a>
+          </li>
+      </ul>
+      
+    </div>
+    <div class="noti">
+
+    </div>
+</div>
+
+
+
+
+

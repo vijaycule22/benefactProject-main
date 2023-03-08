@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "nLWOAa11gj8UgVFTCXiLflWaZoed3oyrpgJPddPw7RI=",
+  "Source": "BenefactServer",
+  "BasePath": "_content/BenefactServer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

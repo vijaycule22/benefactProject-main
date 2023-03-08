@@ -1,0 +1,61 @@
+<div class="header">
+    <div class="header-grid">
+        <div class="search-block">
+            <input type="text" placeholder="Search" class="search">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
+        <div class="profile-noti">
+            <div class="notifications" (click)="op.toggle($event)">
+                <div class="count">
+                    2
+                </div>
+                <i class="fa fa-bell"></i>
+            </div>
+
+            <div class="profile">
+                <span class="profile-icon">
+                    {{(lstUserDetails.FIRST_NAME).charAt(0)}} {{(lstUserDetails.LAST_NAME).charAt(0)}}
+                </span>
+                <div class="names">
+                    <label class="profile-name">{{lstUserDetails.FIRST_NAME}} {{lstUserDetails.LAST_NAME}}</label>
+                    <span class="profile-id">{{lstUserDetails.EMPLOYEE_ID}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<p-overlayPanel #op styleClass="notification-popup">
+    <div class="notification">
+        <div class="noti-header">
+            <span>Notifications</span>
+        </div>
+        <div class="noti">
+            <div class="circle">
+                <img src="../../../assets/svg/user.png" alt="" height="36px" width="36px">
+            </div>
+            <label class="message">Member 1 requested for surety dfgjh dfkghfg
+                <p  class="time">3h ago</p>
+            </label>
+           
+        </div>
+        <div class="noti">
+            <div class="circle check">
+                <i class="fa fa-check"></i>
+            </div>
+            <label class="message">Your Loan has been Approved
+
+                <p class="time">21min ago</p>
+            </label>
+        </div>
+        <div class="noti">
+            <div class="circle">
+                <img src="../../../assets/svg/user.png" alt="" height="36px" width="36px">
+            </div>
+            <label class="message">Member 1 requested for surety
+                <p class="time">3h ago</p>
+            </label>
+           
+        </div>
+    </div>
+</p-overlayPanel>

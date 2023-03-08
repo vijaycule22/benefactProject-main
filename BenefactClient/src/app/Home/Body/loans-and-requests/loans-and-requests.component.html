@@ -1,0 +1,161 @@
+<div class="row loan-and-requests">
+    <div class="col-7">
+        <p class="titles">Loan Status</p>
+    <div class="body-div mb-4">
+        <div >
+           <div class="stepper-main">
+               <mat-horizontal-stepper labelPosition="bottom" #stepper >
+                   <mat-step [completed]="'true'" [editable]="'false'">
+                       <ng-template matStepLabel>Loan Applied</ng-template>
+                       <div>
+                           Loan has been applied successfully
+                       </div>
+                   </mat-step>
+                   <mat-step [completed]="'true'" [editable]="'false'">
+                       <ng-template matStepLabel>surety Approval</ng-template>
+                       <div>
+                             Waiting for surety member approval
+                       </div>
+                   </mat-step>
+                   <mat-step [state]="'info'" [editable]="'false'">
+                       <ng-template matStepLabel>Admin Approval</ng-template>
+                       
+                       <div>
+                           Waiting for Admin member approval
+                     </div>
+                   </mat-step>
+                   <mat-step [editable]="'false'">
+                       <ng-template matStepLabel>Approved</ng-template>
+               
+                       <div>
+                           your loan has been approved successfully
+                     </div>
+                   </mat-step>
+                   <!-- <ng-template matStepperIcon="phone">
+                    <mat-icon>call_end</mat-icon>
+                  </ng-template>
+                  <ng-template matStepperIcon="chat">
+                    <mat-icon>forum</mat-icon>
+                  </ng-template> --> 
+               </mat-horizontal-stepper>
+           </div>
+        </div>
+    </div>
+    
+
+    <p class="titles">Recent Loans</p>
+    
+    <!-- <div class="loan-requests">
+        <div class="request-block">
+            <span class="img"> <i class="fa fa-user-circle"></i>  <img src="" alt="" height="45px" width="45px"></span>
+            <div class="title-block">
+                <span>Name</span>
+                <label for="">Varun Mayaluru</label>
+            </div>
+            <div class="title-block">
+                <span>Amount</span>
+                <label for="">1,50,000</label>
+            </div>
+            <div>
+    <label for="" class="status complete">Accepted</label>
+            </div>
+        </div>
+    </div>
+    
+    <div class="loan-requests">
+        <div class="request-block">
+            <span class="img"> <i class="fa fa-user-circle"></i>  <img src="" alt="" height="45px" width="45px"></span>
+            <div class="title-block">
+                <span>Name</span> 
+                <label for="">Varun Mayaluru</label>
+            </div>
+            <div class="title-block">
+                <span>Amount</span>
+                <label for="">1,50,000</label>
+            </div>
+            <div>
+    <label for="" class="status complete">Accepted</label>
+            </div>
+        </div>
+    </div> -->
+    <div class="table-Div">
+        <p-table [value]="recentLoan">
+            <ng-template pTemplate="header">
+               <tr>
+                  <th >Duration</th>
+                  <th class="text-center">Amount</th>
+                  <th class="text-center">Status</th>
+                  <th>Action</th>
+               </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-loan let-rowIndex="rowIndex">
+               <tr>
+                  <td> {{loan.name}}</td>
+                  <td class="text-center"> {{loan.age}}</td>
+                  <td class="text-center"> <span class="status complete" *ngIf="rowIndex != 0 ">Completed</span>
+                    <span *ngIf="rowIndex == 0" class="status upcoming">On-going</span></td>
+                  <td>          <button class="raised-btn">View</button></td>
+            </ng-template>
+         </p-table>
+    </div>
+
+    </div>
+    <div class="col-5">
+        <p class="titles">Loan Requests</p>
+    
+        <!-- <div class="loan-requests">
+            <div class="request-block">
+                <span class="img"> <i class="fa fa-user-circle"></i>  <img src="" alt="" height="45px" width="45px"></span>
+                <div class="title-block">
+                    <span>Name</span>
+                    <label for="">Varun Mayaluru</label>
+                </div>
+                <div class="title-block">
+                    <span>Amount</span>
+                    <label for="">1,50,000</label>
+                </div>
+                <div>
+        
+                    <button class="btn accept"><i class="fa fa-check"></i> Accept</button>
+                    <button class="btn ignore"><i class="fa fa-times"></i> Ignore</button>
+                </div>
+            </div>
+        </div> -->
+        <div class="table-Div ">
+
+            <p-table [value]="recentLoan">
+                <ng-template pTemplate="header">
+                   <tr>
+                      <th>NAME</th>
+                      <th>Amount</th>
+                      <th class="text-center">Status</th>
+                      <th class="text-center" style="width:180px">Action</th>
+                   </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-loan let-rowIndex="rowIndex">
+                   <tr class="{{rowIndex == 0 ? 'request-waiting-BgColor' : ''}}">
+                    <td>
+                        <div class="user"><img height="32px" width="32px" src="../../../../assets/svg/user.png" alt="">
+                            <label>{{loan.gender}}</label>
+                        </div>
+                    </td>
+                      <td style="font-weight: bold;"><i class="fa fa-inr"></i> {{loan.age}}</td>
+                      <td class="text-center"> <span *ngIf="rowIndex == 0">-</span> <span class="status complete" *ngIf="rowIndex != 0 && rowIndex != 1 && rowIndex != 3">Completed</span>
+                        <span class="status reject" *ngIf="rowIndex == 3">Rejected</span>
+                        <span *ngIf="rowIndex == 1" class="status upcoming">On-going</span></td>
+                      <td class="text-center">
+                        <!-- <button pButton pRipple type="button" label="Accept" class="p-button-rounded p-button-success" ></button>&nbsp;
+                        <button pButton pRipple type="button" label="Reject" class="p-button-rounded p-button-success" *ngIf="rowIndex == 0" (click)="confirm()"></button>
+                        <button pButton pRipple *ngIf="rowIndex != 0" type="button" label="View" class="p-button-rounded p-button-success"  ></button> -->
+                        <button class="raised-btn" *ngIf="rowIndex == 0" (click)="confirm()"><i class="fa fa-check"></i></button>&nbsp;
+                        <button class="raised-btn" *ngIf="rowIndex == 0" (click)="confirm()"><i class="fa fa-times"></i></button>
+                        <button class="raised-btn"  *ngIf="rowIndex != 0">View</button>
+                    </td>
+                </ng-template>
+             </p-table>
+        </div>
+    </div>
+    
+</div>
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
